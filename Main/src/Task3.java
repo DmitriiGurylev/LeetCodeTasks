@@ -1,3 +1,5 @@
+package src;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,20 +19,19 @@ import java.util.stream.Collectors;
  * */
 
 class Solution {
+
 	public int countArrangement(int n) {
 		int count = 0;
-		Set<Integer> set;
-
+		Set<Integer> set = new HashSet<>();
 		if (n == 1) {
 			return ++count;
 		}
-
 		if (n >= 2) {
 			for (int i1 = 1; i1 < n + 1; i1++) {
-				set = new HashSet<>(n);
+				set.clear();
 				set.add(i1);
 				for (int i2 = 1; i2 < n + 1; i2++) {
-					set = new HashSet<>();
+					set.clear();
 					set.add(i1);
 					if (set.contains(i2)) {
 						continue;
@@ -43,21 +44,23 @@ class Solution {
 					}
 					if (n >= 3) {
 						for (int i3 = 1; i3 < n + 1; i3++) {
-							set = new HashSet<>();
+							set.clear();
 							set.add(i1);
 							set.add(i2);
 							if (set.contains(i3)) {
 								continue;
-							} else if (i3 % 3 == 0 || 3 % i3 == 0) {
+							}
+							else if (i3 % 3 == 0 || 3 % i3 == 0) {
 								set.add(i3);
 								if (n == 3)
 									count++;
-							} else {
+							}
+							else {
 								continue;
 							}
 							if (n >= 4) {
 								for (int i4 = 1; i4 < n + 1; i4++) {
-									set = new HashSet<>();
+									set.clear();
 									set.add(i1);
 									set.add(i2);
 									set.add(i3);
@@ -72,7 +75,7 @@ class Solution {
 									}
 									if (n >= 5) {
 										for (int i5 = 1; i5 < n + 1; i5++) {
-											set = new HashSet<>();
+											set.clear();
 											set.add(i1);
 											set.add(i2);
 											set.add(i3);
@@ -88,7 +91,7 @@ class Solution {
 											}
 											if (n >= 6) {
 												for (int i6 = 1; i6 < n + 1; i6++) {
-													set = new HashSet<>();
+													set.clear();
 													set.add(i1);
 													set.add(i2);
 													set.add(i3);
@@ -105,7 +108,7 @@ class Solution {
 													}
 													if (n >= 7) {
 														for (int i7 = 1; i7 < n + 1; i7++) {
-															set = new HashSet<>();
+															set.clear();
 															set.add(i1);
 															set.add(i2);
 															set.add(i3);
@@ -123,7 +126,7 @@ class Solution {
 															}
 															if (n >= 8) {
 																for (int i8 = 1; i8 < n + 1; i8++) {
-																	set = new HashSet<>();
+																	set.clear();
 																	set.add(i1);
 																	set.add(i2);
 																	set.add(i3);
@@ -142,7 +145,7 @@ class Solution {
 																	}
 																	if (n >= 9) {
 																		for (int i9 = 1; i9 < n + 1; i9++) {
-																			set = new HashSet<>();
+																			set.clear();
 																			set.add(i1);
 																			set.add(i2);
 																			set.add(i3);
@@ -162,7 +165,7 @@ class Solution {
 																			}
 																			if (n >= 10) {
 																				for (int i10 = 1; i10 < n + 1; i10++) {
-																					set = new HashSet<>();
+																					set.clear();
 																					set.add(i1);
 																					set.add(i2);
 																					set.add(i3);
@@ -183,7 +186,7 @@ class Solution {
 																					}
 																					if (n >= 11) {
 																						for (int i11 = 1; i11 < n + 1; i11++) {
-																							set = new HashSet<>();
+																							set.clear();
 																							set.add(i1);
 																							set.add(i2);
 																							set.add(i3);
@@ -205,7 +208,7 @@ class Solution {
 																							}
 																							if (n >= 12) {
 																								for (int i12 = 1; i12 < n + 1; i12++) {
-																									set = new HashSet<>();
+																									set.clear();
 																									set.add(i1);
 																									set.add(i2);
 																									set.add(i3);
@@ -228,8 +231,8 @@ class Solution {
 																									}
 																									if (n >= 13) {
 																										for (int i13 = 1; i13 < n + 1; i13++) {
-																											set = new HashSet<>();
-																											set.add(i1);
+																											set.clear();																											set.add(i1);
+																											set.add(i1);																											set.add(i1);
 																											set.add(i2);
 																											set.add(i3);
 																											set.add(i4);
@@ -252,8 +255,8 @@ class Solution {
 																											}
 																											if (n >= 14) {
 																												for (int i14 = 1; i14 < n + 1; i14++) {
-																													set = new HashSet<>();
-																													set.add(i1);
+																													set.clear();																											set.add(i1);
+																													set.add(i1);																													set.add(i1);
 																													set.add(i2);
 																													set.add(i3);
 																													set.add(i4);
@@ -277,7 +280,7 @@ class Solution {
 																													}
 																													if (n == 15) {
 																														for (int i15 = 1; i15 < n + 1; i15++) {
-																															set = new HashSet<>();
+																															set.clear();
 																															set.add(i1);
 																															set.add(i2);
 																															set.add(i3);
@@ -293,10 +296,13 @@ class Solution {
 																															set.add(i13);
 																															set.add(i14);
 																															if (set.contains(i15)) {
-																															} else if (i15 % 15 == 0 || 15 % i15 == 0) {
+																															}
+																															else if (i15 % 15 == 0 || 15 % i15 == 0) {
 																																set.add(i15);
 																																count++;
-																															} else {
+																															}
+																															else {
+																																continue;
 																															}
 																														}
 																													}
@@ -330,69 +336,53 @@ class Solution {
 		return count;
 	}
 
-	public int countArrangement1(int n) {
+	public int countArrangementNew(int n) {
 		int count = 0;
-		HashSet<Integer> set;
-
+		Set<Integer> set = new HashSet<>();
 		if (n == 1) {
 			return ++count;
 		}
-
-
 		if (n >= 2) {
 			for (int i1 = 1; i1 < n + 1; i1++) {
-				set = new HashSet<>(n);
-				set.add(i1);
-				count += countAdd(n, 3, set, count, n);
-			}
-		}
-		return count;
-	}
-
-	public int countAdd(int nNew, int n, HashSet <Integer> set, int count, int limit) {
-		if (limit==n)
-			return count;
-		if (nNew >= n) {
-			for (int i = 1; i < n + 1; i++) {
-				HashSet<Integer> newSet = new HashSet<>(set);
 				set.clear();
-				set.addAll(newSet);
-				if (set.contains(i)) {
-					continue;
-				} else if (i % n == 0 || n % i == 0) {
-					set.add(i);
-					if (n == 5)
-						count++;
-				} else {
-					continue;
-				}
-				countAdd(nNew, n+1, set, count, limit);
+				set.add(i1);
+				getCount(n,2,set,count);
 			}
+			return count;
 		}
-		return count;
 	}
-}
 
-public class Task3 {
-	public static void main(String[] args) {
-		Solution sol = new Solution();
-		System.out.println(sol.countArrangement(1));
-		System.out.println(sol.countArrangement(2));
-		System.out.println(sol.countArrangement(3));
-		System.out.println(sol.countArrangement(4));
-		System.out.println(sol.countArrangement(5));
-		System.out.println(sol.countArrangement(6));
-		System.out.println(sol.countArrangement(7));
-		System.out.println(sol.countArrangement(9));
-		System.out.println(sol.countArrangement(10));
-		System.out.println(sol.countArrangement(11));
-		System.out.println(sol.countArrangement(12));
-		System.out.println(sol.countArrangement(13));
-		System.out.println(sol.countArrangement(14));
-		System.out.println(sol.countArrangement(15));
-		System.out.println(sol.countArrangement1(5));
+		public int getCount(int n, int nNow, Set<Integer> setOld, int count){
+			for (int i = 1; i < n + 1; i++) {
+
+
+
+			}
+			return count;
+		}
+
 
 
 	}
-}
+
+	public class Task3 {
+		public static void main(String[] args) {
+			Solution sol = new Solution();
+			System.out.println("n=1: "+sol.countArrangement(1));
+			System.out.println("n=2: "+sol.countArrangement(2));
+			System.out.println("n=3: "+sol.countArrangement(3));
+			System.out.println("n=4: "+sol.countArrangement(4));
+			System.out.println("n=5: "+sol.countArrangement(5));
+			System.out.println("n=6: "+sol.countArrangement(6));
+			System.out.println("n=7: "+sol.countArrangement(7));
+			System.out.println("n=8: "+sol.countArrangement(8));
+			System.out.println("n=9: "+sol.countArrangement(9));
+			System.out.println("n=10: "+sol.countArrangement(10));
+			System.out.println("n=11: "+sol.countArrangement(11));
+			System.out.println("n=12: "+sol.countArrangement(12));
+//		System.out.println("n=13: "+sol.countArrangement(13));
+//		System.out.println("n=14: "+sol.countArrangement(14));
+//		System.out.println("n=15: "+sol.countArrangement(15));
+		}
+	}
 
