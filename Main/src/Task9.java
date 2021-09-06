@@ -5,11 +5,55 @@ import java.util.*;
 public class Task9 {
 
     public static void main (String[] args){
-        int[] arr = {7,2,8,5,0,9,1,2,9,5,3,6,6,7,3,2,8,4,3,7,9,5,7,7,4,7,4,9,4,7,0,1,1,1,7,4,0,0,6};
-        System.out.println(thirdMax(arr));
-        System.out.println(findDisappearedNumbers(arr));
-        System.out.println(Arrays.toString(plusOne(arr)));
+        int[] arr1 = {7,4,5,6,4,2,1,4,6,5,4,8,3,1,8,2,7,6,3,2};
+        int[] arr2 = {3,2,1};
+        int[] arr3 = {7,2,8,5,0,9,1,2,9,5,3,6,6,7,3,2,8,4,3,7,9,5,7,7,4,7,4,9,4,7,0,1,1,1,7,4,0,0,6};
+        System.out.println(thirdMax(arr3));
+        System.out.println(findDisappearedNumbers(arr3));
+        System.out.println(Arrays.toString(plusOne(arr3)));
+    }
 
+    public static int removeElement(int[] nums, int val) {
+        int deleteItems = 0;
+        int end = nums.length-1;
+        for (int i=0; i<nums.length; i++){
+            if (nums.length == 1 & nums[0] == val){
+                deleteItems++;
+                break;
+            }
+            if (nums[i]==val){
+                while(nums[end] == val && end>=0){
+                    if (end != i){
+                        end--;
+                        deleteItems++;
+                    }
+                    else{
+                        deleteItems++;
+                        return nums.length - deleteItems;
+                    }
+                }
+                nums[i] = nums[end];
+                nums[end] = val;
+                end--;
+                deleteItems++;
+            }
+            if (i >= end){
+                break;
+            }
+        }
+        return nums.length - deleteItems;
+    }
+
+    public static int heightChecker(int[] heights) {
+        int[] arrNew = Arrays.copyOf(heights, heights.length);
+        Arrays.sort(arrNew);
+        int indexes=0;
+        for (int i=0; i<heights.length; i++){
+            if (heights[i]!=arrNew[i]){
+                indexes++;
+            }
+        }
+        return indexes;
     }
 
     public static int thirdMax(int[] nums) {
@@ -98,5 +142,31 @@ public class Task9 {
             arrNew[i] = Integer.parseInt(newStr.substring(i,i+1));
         }
         return arrNew;
+    }
+
+    public static int[] sortArrayByParity(int[] nums) {
+        int w=0;
+        int r=0;
+        int var;
+        if (nums.length < 2){
+            return nums;
+        }
+        for (int i=0; i<nums.length; i++){
+            if (nums[w]%2 == 0){
+                w++;
+                r++;
+            }
+            else if (r != w && nums[r]%2 == 0){
+                var = nums[w];
+                nums[w]=nums[r];
+                nums[r]=var;
+                w++;
+                r++;
+            }
+            else{
+                r++;
+            }
+        }
+        return nums;
     }
 }
