@@ -6,33 +6,122 @@ import java.util.*;
 public class Task10 {
 
     public static void main (String[] args){
-        System.out.println(generate(5));
+        int[][] mat1 = {{1,2,3},{4,5,6},{7,8,9}};
+        System.out.println(Arrays.toString(findDiagonalOrder(mat1)));
+        System.out.println(spiralOrder(mat1));
     }
 
-    public static List<List<Integer>> generate(int numRows) {
-        List <List<Integer> > pascalTriangle = new LinkedList<>();
-        Integer[][] externalArray = new Integer[numRows][];
+    public static int[] findDiagonalOrder(int[][] mat) {
+        int[] arrNew = new int[mat.length * mat[0].length];
+        int row=0, column=0;
+        int i=0;
 
-        for (int i=0; i<numRows; i++){
-            Integer[] innerArray = new Integer[i+1];
-            externalArray[i] = innerArray;
-
-            innerArray[0]=1;
-            innerArray[innerArray.length-1]=1;
-
-            for (int j=1; j< innerArray.length-1; j++){
-                innerArray[j] = externalArray[i-1][j-1] + externalArray[i-1][j];
+        while (true){
+            while(column<mat[0].length && row>=0){
+                arrNew[i] = mat[row][column];
+                if (row==mat.length-1 && column==mat[0].length-1){
+                    return arrNew;
+                }
+                row--;
+                column++;
+                i++;
             }
-            pascalTriangle.add(Arrays.asList(innerArray));
+            if (row==-1 && column==mat[0].length){
+                row++;
+                row++;
+                column--;
+            }
+            else if (row==-1){
+                row++;
+            }
+            else if (column==mat[0].length){
+                column--;
+                row++;
+                row++;
+            }
+            while (column>=0 && row<mat.length){
+                arrNew[i] = mat[row][column];
+                if (row==mat.length-1 && column==mat[0].length-1){
+                    return arrNew;
+                }
+                row++;
+                column--;
+                i++;
+            }
+            if (row==mat.length && column==-1){
+                row--;
+                column++;
+                column++;
+            }
+            else if (column==-1){
+                column++;
+            }
+            else if (row==mat.length){
+                column++;
+                column++;
+                row--;
+            }
         }
-        return pascalTriangle;
     }
 
-    public String addBinary(String a, String b) {
-        return (new BigInteger(a, 2).add(new BigInteger(b, 2)).toString(2));
-    }
+    public static List<Integer> spiralOrder(int[][] matrix) {
+        List <Integer> list = new ArrayList<>();
+        int matrixSize = matrix.length * matrix[0].length;
+        int row=0, column=0, rowUp=0, rowDown=0, columnLeft=0, columnRight=0;
 
-    public int strStr(String haystack, String needle) {
-        return (haystack.contains(needle)) ? haystack.indexOf(needle) : -1 ;
+        while (true){
+
+            while(column<matrix[0].length - columnRight){
+                list.add(matrix[row][column]);
+                if (list.size() == matrixSize){
+                    return list;
+                }
+                column++;
+            }
+            rowUp++;
+            if (column==matrix[0].length - columnRight){
+                row++;
+                column--;
+            }
+
+            while(row<matrix.length - rowDown){
+                list.add(matrix[row][column]);
+                if (list.size() == matrixSize){
+                    return list;
+                }
+                row++;
+            }
+            columnRight++;
+            if (row==matrix.length - rowDown){
+                row--;
+                column--;
+            }
+
+            while(column>= columnLeft){
+                list.add(matrix[row][column]);
+                if (list.size() == matrixSize){
+                    return list;
+                }
+                column--;
+            }
+            rowDown++;
+            if (column<columnLeft){
+                row--;
+                column++;
+            }
+
+            while(row>= rowUp){
+                list.add(matrix[row][column]);
+                if (list.size() == matrixSize){
+                    return list;
+                }
+                row--;
+            }
+            columnLeft++;
+            if (row<rowUp){
+                row++;
+                column++;
+            }
+        }
     }
 }
