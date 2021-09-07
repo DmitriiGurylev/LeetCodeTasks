@@ -1,9 +1,8 @@
-package src;//package src;
+package src;
 
-import java.math.BigInteger;
 import java.util.*;
 
-public class Task10 {
+public class Task15 {
 
     public static void main (String[] args){
         int[][] mat1 = {{1,2,3},{4,5,6},{7,8,9}};
