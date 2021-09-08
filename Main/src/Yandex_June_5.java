@@ -45,14 +45,16 @@ public class Yandex_June_5 {
             }
         }
 
-        for (int i = 0; i < 10; i++) {
+        if (appartsPerFloor==0){
+            return (appartment1<floorsCount ? 1 : 0) + " " + (floorsCount==1 ? 1 : (appartment2floor==2 ? appartment2floor: 0) );
+        }
+        int i=0;
+        while(true) {
             if ((i + 1) * appartsPerFloor * floorsCount >= appartment1) {
                 entrance1 = i + 1;
                 break;
             }
-        }
-        if (appartsPerFloor==0){
-            return (appartment1<floorsCount ? 1 : 0) + " " + (floorsCount==1 ? 1 : 0);
+            i++;
         }
         int floorNeed = (appartment1 - ((entrance1 - 1) * floorsCount * appartsPerFloor)) / appartsPerFloor;
         appartment1floor =
