@@ -10,19 +10,59 @@ public class Yandex_June_5 {
     }
 
 
-    public static String define(String str){
+    public static String define(String str) {
         String[] splits = str.split(" ");
         int appartment1 = Integer.parseInt(splits[0]);
         int floorsCount = Integer.parseInt(splits[1]);
         int appartment2 = Integer.parseInt(splits[2]);
-        int entrance = Integer.parseInt(splits[3]);
+        int entrance2 = Integer.parseInt(splits[3]);
         int appartment2floor = Integer.parseInt(splits[4]);
 
-        int appartsPerFloor = appartment2 / appartment2floor + 1;
-        int appartsPerEntrance = appartsPerFloor * floorsCount;
-        int neededEntrance = appartment1 / appartsPerEntrance + 1;
+        int appartment1floor = 0;
+        int entrance1 = 0;
+
+        int appartsPerFloor = 0;
+        int tr;
+
+        if (appartment2floor <= floorsCount * (entrance2-1)){
+            return -1 + " " + -1;
+        }
 
 
+        for (int i = 0; i < Math.max(appartment1, appartment2); i++) {
 
+            tr =   ((float) appartment2 / (i + 1)) % 1 == 0 ? appartment2 / (i + 1) : appartment2 / (i + 1) + 1;
+
+
+            if ((entrance2 - 1) * floorsCount + appartment2floor == tr) {
+
+                if ((entrance2 - 1) * floorsCount + appartment2floor == (((float) appartment2 / (i + 2)) % 1 == 0 ? appartment2 / (i + 2) : appartment2 / (i + 2) + 1)){
+                }
+                else {
+                    appartsPerFloor = i + 1;
+                }
+                break;
+            }
+        }
+
+        for (int i = 0; i < 10; i++) {
+            if ((i + 1) * appartsPerFloor * floorsCount >= appartment1) {
+                entrance1 = i + 1;
+                break;
+            }
+        }
+        if (appartsPerFloor==0){
+            return (appartment1<floorsCount ? 1 : 0) + " " + (floorsCount==1 ? 1 : 0);
+        }
+        int floorNeed = (appartment1 - ((entrance1 - 1) * floorsCount * appartsPerFloor)) / appartsPerFloor;
+        appartment1floor =
+                (float) (appartment1 - ((entrance1 - 1) * floorsCount * appartsPerFloor)) / appartsPerFloor % 1 == 0 ?
+                        floorNeed :
+                        floorNeed + 1;
+        if (appartment1floor>floorsCount){
+            appartment1floor=floorsCount;
+        }
+
+        return  entrance1 + " " + appartment1floor;
     }
 }

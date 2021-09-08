@@ -17,14 +17,8 @@
 //                    grid[i][j]=2;
 //                    map.put(++id, findTheIslandCounts(i,j,grid.length));
 //                    map.get(id)
-//
-//
 //                }
-//
-//
 //            }
-//
-//
 //    }
 //
 //    public int findTheIslandCounts(int i,int j,int gridLength){
@@ -33,11 +27,6 @@
 //                grid[i][j] = 2;
 //                findTheIslandCounts(i,j,grid.length);
 //    }
-//
-//
-//
-//
-//
 //    }
 //
 //}
