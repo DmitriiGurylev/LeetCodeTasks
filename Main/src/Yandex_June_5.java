@@ -4,11 +4,21 @@ import java.util.Scanner;
 
 public class Yandex_June_5 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String digits = scanner.nextLine();
-        System.out.println(define(digits));
-    }
+        System.out.println(define("89 20 41 1 11")); // 2 3
+        System.out.println(define("11 1 1 1 1")); // 0 1
+        System.out.println(define("3 2 2 2 1")); // -1 -1
+        System.out.println(define("5 20 2 1 1")); // 1 0
+        System.out.println(define("11 2 4 1 2")); // 0 2
+        System.out.println(define("1000 1 449 449 1")); // 1000 1
+        System.out.println(define("753 10 1000 1 1")); // 1 1
+        System.out.println(define("5 3 2 1 3")); // -1 -1
 
+
+
+//        Scanner scanner = new Scanner(System.in);
+//        String digits = scanner.nextLine();
+//        System.out.println(define(digits));
+    }
 
     public static String define(String str) {
         String[] splits = str.split(" ");
@@ -20,13 +30,10 @@ public class Yandex_June_5 {
 
         int appartment1floor = 0;
         int entrance1 = 0;
-
         int appartsPerFloor = 0;
         int tr;
 
-        if (appartment2floor <= floorsCount * (entrance2-1)){
-            return -1 + " " + -1;
-        }
+
 
 
         for (int i = 0; i < Math.max(appartment1, appartment2); i++) {
@@ -45,9 +52,36 @@ public class Yandex_June_5 {
             }
         }
 
-        if (appartsPerFloor==0){
-            return (appartment1<floorsCount ? 1 : 0) + " " + (floorsCount==1 ? 1 : (appartment2floor==2 ? appartment2floor: 0) );
+        if (appartment2 <= floorsCount * (entrance2-1) || appartment2 <= (entrance2-1)*floorsCount+appartment2floor){
+            return -1 + " " + -1;
         }
+
+        if (appartsPerFloor==0){
+
+            String first;
+            if (appartment1<floorsCount || (appartment1<appartment2 && appartment2floor==1)){
+                first = "1";
+            }
+            else{
+                first = "0";
+            }
+
+            String second;
+            if (floorsCount==1 || (appartment1<appartment2 && appartment2floor==1)){
+                second = "1";
+            }
+            else if (appartment2floor==2) {
+                second = ""+appartment2floor;
+            }
+            else{
+                second = "0";
+            }
+
+            return first + " " + second;
+        }
+
+
+
         int i=0;
         while(true) {
             if ((i + 1) * appartsPerFloor * floorsCount >= appartment1) {
