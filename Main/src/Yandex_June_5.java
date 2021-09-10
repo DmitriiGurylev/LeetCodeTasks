@@ -91,6 +91,8 @@ public class Yandex_June_5 {
             return first + " " + second;
         }
 
+
+
         int i=0;
         while(true) {
             if ((i + 1) * appartsPerFloor * floorsCount >= appartment1) {
