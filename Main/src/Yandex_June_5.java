@@ -13,11 +13,8 @@ public class Yandex_June_5 {
         System.out.println(define("753 10 1000 1 1")); // 1 1
         System.out.println(define("5 3 2 1 3")); // -1 -1
         System.out.println(define("41 10 41 1 10")); // -1 -1
-        System.out.println(define("40 10 40 1 10")); //
-
-
-
-
+        System.out.println(define("40 10 40 1 10")); // 1 10
+        System.out.println(define("5 1000 5 1 2")); // 1 2
 
 //        Scanner scanner = new Scanner(System.in);
 //        String digits = scanner.nextLine();
@@ -37,9 +34,6 @@ public class Yandex_June_5 {
         int appartsPerFloor = 0;
         int tr;
 
-
-
-
         for (int i = 0; i < Math.max(appartment1, appartment2); i++) {
 
             tr =   ((float) appartment2 / (i + 1)) % 1 == 0 ? appartment2 / (i + 1) : appartment2 / (i + 1) + 1;
@@ -56,11 +50,19 @@ public class Yandex_June_5 {
             }
         }
 
-        if (appartment2 <= floorsCount * (entrance2-1) ||
-                appartment2 < (entrance2-1)*floorsCount+appartment2floor ||
-                (appartment1==appartment2 && appartsPerFloor==0)){
+        if (appartment2 <= floorsCount * (entrance2-1)){
             return -1 + " " + -1;
         }
+
+        if (appartment2 < (entrance2-1)*floorsCount+appartment2floor){
+            return -1 + " " + -1;
+        }
+
+        if (appartment2 > (appartment2/floorsCount)*floorsCount-1 && appartment2 <= (appartment2/floorsCount)) {}
+        else{
+            return -1 + " " + -1;
+        }//TODO
+
         if (appartment1==appartment2){
             return entrance2 + " " + appartment2floor;
         }
