@@ -33,6 +33,7 @@ public class Yandex_June_5 {
         int entrance1 = 0;
         int appartsPerFloor = 0;
         int tr;
+        boolean ifCanExist = true;
 
         for (int i = 0; i < Math.max(appartment1, appartment2); i++) {
 
@@ -50,6 +51,8 @@ public class Yandex_June_5 {
             }
         }
 
+
+
         if (appartment2 <= floorsCount * (entrance2-1)){
             return -1 + " " + -1;
         }
@@ -58,10 +61,17 @@ public class Yandex_June_5 {
             return -1 + " " + -1;
         }
 
-        if (appartment2 > (appartment2/floorsCount)*floorsCount-1 && appartment2 <= (appartment2/floorsCount)) {}
-        else{
-            return -1 + " " + -1;
-        }//TODO
+
+        if (entrance2==1) {
+            int from = (((float)appartment2/appartment2floor)%1==0 ? appartment2/appartment2floor : appartment2/appartment2floor +1) * (appartment2floor-1);
+            int to = (((float)appartment2/appartment2floor)%1==0 ? appartment2/appartment2floor : appartment2/appartment2floor +1) * appartment2floor;
+            if (from < appartment2 && appartment2 <= to) {
+            } else {
+                return -1 + " " + -1;
+            }
+        }else{
+            //TODO
+        }
 
         if (appartment1==appartment2){
             return entrance2 + " " + appartment2floor;
