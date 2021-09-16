@@ -14,17 +14,11 @@ public class Yandex_June_7 {
         int n = Integer.parseInt(splits[0]);
         int k = Integer.parseInt(splits[1]);
         int m = Integer.parseInt(splits[2]);
-
-        if (k>n || m>k){
-            return 0;
-        }
-
+        if (k>n || m>k) { return 0; }
         int count=0;
-        int allN = n;
-        while (allN >= k){
-
+        while (n >= k) {
             count += k/m;
-            allN += -k + k%m ;
+            n += -k + k%m ;
         }
         return count;
     }
