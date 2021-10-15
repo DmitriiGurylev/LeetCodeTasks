@@ -4,85 +4,103 @@ import java.util.Scanner;
 
 public class Yandex_June_9 {
     public static void main(String[] args) {
+        System.out.println(equations(1,0,0,1,3,3));
+        System.out.println(equations(1,1,2,2,1,2));
+        System.out.println(equations(0,2,0,4,1,2));
+        System.out.println(equations(2,3,4,6,1,2));
+        System.out.println(equations(0,1,0,3,5,15));
+        System.out.println(equations(0,0,0,0,0,0));
+        System.out.println(equations(0,0,1,1,6,0));
+        System.out.println(equations(2,2,2,5,8,8));
+        System.out.println(equations(1,1,1,1,1,1));
+        System.out.println(equations(0,1,0,1,2,1));
+        System.out.println(equations(2,3,4,6,1,1));
+        System.out.println(equations(0,-1,-3,0,5,3));
+        System.out.println(equations(1,-1,1,1,5,8));
+        System.out.println(equations(0,0,0,0,0,0.1f));
+        System.out.println(equations(0,0,1,2,0,3));
+        System.out.println(equations(0,0,0,2,0,3));
+
+
         Scanner scanner = new Scanner(System.in);
-        int a = scanner.nextInt();
-        int b = scanner.nextInt();
-        int c = scanner.nextInt();
-        int d = scanner.nextInt();
-        int e = scanner.nextInt();
-        int f = scanner.nextInt();
+        float a = scanner.nextFloat();
+        float b = scanner.nextFloat();
+        float c = scanner.nextFloat();
+        float d = scanner.nextFloat();
+        float e = scanner.nextFloat();
+        float f = scanner.nextFloat();
         System.out.println(equations(a,b,c,d,e,f));
     }
-    public static String equations(int a, int b, int c, int d, int e, int f) {
-        if (a==0 && c==0 && b!=0 && d!=0){
-            float y1 = (float)e/b;
-            float y2 = (float)f/d;
-            return y1==y2 ? "4 "+y1 : "0" ;
+    public static String equations(float a, float b, float c, float d, float e, float f) {
+        float newa=0,newb=0,newe=0;
+        boolean same = false;
+        float ratio = 0;
+        
+        if (a != 0) {
+            ratio = c/a;
         }
-        else if (b==0 && d==0 && a!=0 && c!=0){
-            float x1 = (float)e/a;
-            float x2 = (float)f/c;
-            return x1==x2 ? "3 "+x1 : "0" ;
+        else if (b != 0) {
+            ratio = d/b;
         }
-        else if (a==0 && b!=0 && c!=0 && d!=0) {
-            float y1 = (float)e/b;
-            float x2 = (f-d*y1) / c;
-            return "2 "+x2+" "+y1;
+
+        if (a*ratio == c && b*ratio == d){
+            if (e*ratio == f) {
+                newa = a;
+                newb = b;
+                newe = e;
+                same = true;
+            }
+            else {
+                return "0";
+            }
         }
-        else if (a!=0 && b==0 && c!=0 && d!=0) {
-            float x1 = (float)e/a;
-            float y2 = (f-c*x1) / d;
-            return "2 "+x1+" "+y2;
-        }
-        else if (a!=0 && b!=0 && c==0 && d!=0) {
-            float y2 = (float)f/d;
-            float x1 = (e-b*y2) / a;
-            return "2 "+x1+" "+y2;
-        }
-        else if (a!=0 && b!=0 && c!=0 && d==0) {
-            float x2 = (float)f/c;
-            float y1 = (e-a*x2) / b;
-            return "2 "+x2+" "+y1;
-        }
-        else if (a==0 && b!=0 && c!=0 && d==0) {
-            float y1 = (float)e/b;
-            float x2 = (float)f/c;
-            return "2 "+x2+" "+y1;
-        }
-        else if (a!=0 && b==0 && c==0 && d!=0) {
-            float x1 = (float)e/a;
-            float y2 = (float)f/d;
-            return "2 "+x1+" "+y2;
-        }
-        else if (a==0 && b==0 && c!=0 && d!=0) {
-            return (e!=0) ? "0" : "1"+(-c/d)+" "+f/d;
-        }
-        else if (a!=0 && b!=0 && c==0 && d==0) {
-            return (f!=0) ? "0" : "1"+(-a/b)+" "+e/b;
-        }
-        else if (a!=0 && b==0 && c==0 && d==0) {
-            return (f!=0) ? "0" : "3"+e/a;
-        }
-        else if (a==0 && b!=0 && c==0 && d==0) {
-            return (f!=0) ? "0" : "4"+e/b;
-        }
-        else if (a==0 && b==0 && c!=0 && d==0) {
-            return (e!=0) ? "0" : "3"+f/c;
-        }
-        else if (a==0 && b==0 && c==0 && d!=0) {
-            return (e!=0) ? "0" : "4"+f/d;
-        }
-        else if (a==0 && b==0 && c==0 && d==0) {
-            return (e==0 & f==0) ? "5" : "0";
-        }
-        else if (e==0 && f==0){
+
+        if (a==0 && b==0 && c==0 && d==0 && e==f && e==0){
             return "5";
         }
-        else {
-            if ((d-c*b/a) == 0) return "1 "+(-a/b)+" "+e/b;
-            float y = (float) (f - c*e/a) / (d-(float)c*b/a);
-            float x = (e-b*y)/a;
-            return "2 "+x+" "+y;
+        else if (a==0 && b==0 && c==0 && d==0 && e!=f){
+            return "0";
         }
+        else if ((a==0 && b==0 && e!=0) || (c==0 && d==0 && f!=0)) {
+            return "0";
+        }
+
+        if (same){
+            if (newa==0 && newb!=0){
+                float y = newe / newb;
+                return "4 "+ (y%1==0 ? ""+(int)y : y);
+            }
+            else if (newa!=0 && newb==0){
+                float x = newe / newa;
+                return "3 "+ (x%1==0 ? ""+(int)x : x);
+            }
+            else if (newa!=0 && newb!=0){
+                float k = -newa/newb;
+                float bNew = newe/newb;
+                return "1 "+ (k%1==0 ? ""+(int)k : k) + " " + (bNew%1==0 ? ""+(int)bNew : bNew);
+            }
+        }
+        else{
+            if ((a==0 && c==0) || (b==0 && d==0)){
+                return "0";
+            }
+            else if (a!=0){
+                float y = (f-c*e/a) / (d-c*b/a);
+                float x = (e-b*y)/a;
+                return "2 " + (x%1==0 ? ""+(int)x : x) + " " +(y%1==0 ? ""+(int)y : y);
+            }
+            else if (b!=0){
+                float x = (f-d*e/b) / (c-d*a/b);
+                float y = (e-a*x)/b;
+                return "2 " + (x%1==0 ? ""+(int)x : x) + " " +(y%1==0 ? ""+(int)y : y);
+            }
+            else if (a==0 && b==0 && c!=0 && d!=0) {
+                return "1 " + ((-c/d)%1==0 ? ""+(int)(-c/d) : (-c/d)) + " " + ((f/d)%1==0 ? ""+(int)(f/d) : (f/d));
+            }
+            else if (a!=0 && b!=0 && c==0 && d==0) {
+                return "1 " + ((-a/b)%1==0 ? ""+(int)(-a/b) : (-a/b)) + " " + ((e/b)%1==0 ? ""+(int)(e/b) : (e/b));
+            }
+        }
+        return "s";
     }
 }
