@@ -4,12 +4,29 @@ import java.util.Arrays;
 
 public class Sort {
     public static void main(String[] args) {
-        int[] array = {1, 2, 6, 9, 176, 4, 3, 98, 56, 3, 16, 9, 54, 2, 1, 0, 6, 5, 0, 4, 2};
+        int[] array = new int[]{
+                0, 4, 5, 2, 5, 8, 5, 76, 43, 75, 75, 21, 75, 75, 31, 3,
+                5, 99, 7, 542, 544, 51451, 31, 52, 35, 61, 17, 74, 4};
+
+        int[] arrayRandom = new int[10000];
+        for (int i=0; i<arrayRandom.length; i++) {
+            arrayRandom[i] = (int) (Math.random()*10000);
+        }
+
         System.out.println(Arrays.toString(insertionSortIncreasing(array)));
-        System.out.println(Arrays.toString(insertionSortDecreasing(array)));
         System.out.println(Arrays.toString(selectionSortIncreasing(array)));
-        System.out.println(Arrays.toString(selectionSortDecreasing(array)));
         System.out.println(Arrays.toString(mergeSortIncreasing(array)));
+        System.out.println(Arrays.toString(quickSortIncreasing(array)));
+        System.out.println(Arrays.toString(insertionSortDecreasing(array)));
+        System.out.println(Arrays.toString(selectionSortDecreasing(array)));
+        System.out.println();
+
+        System.out.println(Arrays.toString(insertionSortIncreasing(arrayRandom)));
+        System.out.println(Arrays.toString(selectionSortIncreasing(arrayRandom)));
+        System.out.println(Arrays.toString(mergeSortIncreasing(arrayRandom)));
+        System.out.println(Arrays.toString(quickSortIncreasing(arrayRandom)));
+        System.out.println(Arrays.toString(insertionSortDecreasing(arrayRandom)));
+        System.out.println(Arrays.toString(selectionSortDecreasing(arrayRandom)));
     }
 
     public static int[] insertionSortIncreasing(int[] ar) {
@@ -75,13 +92,13 @@ public class Sort {
     }
 
     public static int[] mergeSortIncreasing(int[] ar) {
-        return merge_sort(ar,0, ar.length-1);
+        return mergeSort(ar,0, ar.length-1);
     }
-    public static int[] merge_sort(int[] ar, int p, int r) {
+    public static int[] mergeSort(int[] ar, int p, int r) {
         if (p<r) {
             int q = p+(r-p)/2;
-            merge_sort(ar,p,q);
-            merge_sort(ar,q+1,r);
+            mergeSort(ar,p,q);
+            mergeSort(ar,q+1,r);
             return merge(ar,p,q,r);
         }
         return ar;
@@ -117,5 +134,43 @@ public class Sort {
         return ar;
     }
 
+    public static int[] quickSortIncreasing(int[] ar) {
+        return quickSort(ar,0, ar.length-1);
+    }
+    public static int[] quickSort(int[] array, int firstIndex, int lastIndex) {
+        if (firstIndex<lastIndex) {
+            int part = partition(array, firstIndex, lastIndex);
+            quickSort(array, firstIndex, part-1);
+            quickSort(array, part, lastIndex);
+        }
+        return array;
+    }
+    public static int partition(int[] array,int first, int last) {
+        int leftIndex = first;
+        int rightIndex = last;
 
+        int general = array[first+(last-first)/2];
+
+        while (leftIndex <= rightIndex) {
+
+            while (array[leftIndex] < general && leftIndex<=last) {
+                leftIndex++;
+            }
+
+            while (array[rightIndex] > general && rightIndex>=first) {
+                rightIndex--;
+            }
+
+            if (leftIndex <= rightIndex) {
+                if (array[leftIndex] != array[rightIndex]) {
+                    int swapVar = array[leftIndex];
+                    array[leftIndex] = array[rightIndex];
+                    array[rightIndex] = swapVar;
+                }
+                leftIndex++;
+                rightIndex--;
+            }
+        }
+        return leftIndex;
+    }
 }
