@@ -5,94 +5,216 @@ import java.util.Arrays;
 public class Sort {
     public static void main(String[] args) {
         int[] array = new int[]{
-                0, 4, 5, 2, 5, 8, 5, 76, 43, 75, 75, 21, 75, 75, 31, 3,
+                20, 4, 5, 2, 5, 8, 5, 76, 43, 75, 75, 21, 75, 75, 31, 3,
                 5, 99, 7, 542, 544, 51451, 31, 52, 35, 61, 17, 74, 4};
 
-        int[] arrayRandom = new int[10000];
-        for (int i=0; i<arrayRandom.length; i++) {
-            arrayRandom[i] = (int) (Math.random()*10000);
-        }
-
+        System.out.println(Arrays.toString(bubbleSortIncreasing(array)));
+        System.out.println(Arrays.toString(shakerSortIncreasing(array)));
         System.out.println(Arrays.toString(insertionSortIncreasing(array)));
         System.out.println(Arrays.toString(selectionSortIncreasing(array)));
         System.out.println(Arrays.toString(mergeSortIncreasing(array)));
         System.out.println(Arrays.toString(quickSortIncreasing(array)));
+
+        System.out.println(Arrays.toString(bubbleSortDecreasing(array)));
+        System.out.println(Arrays.toString(shakerSortDecreasing(array)));
         System.out.println(Arrays.toString(insertionSortDecreasing(array)));
         System.out.println(Arrays.toString(selectionSortDecreasing(array)));
-        System.out.println();
+    }
 
-        System.out.println(Arrays.toString(insertionSortIncreasing(arrayRandom)));
-        System.out.println(Arrays.toString(selectionSortIncreasing(arrayRandom)));
-        System.out.println(Arrays.toString(mergeSortIncreasing(arrayRandom)));
-        System.out.println(Arrays.toString(quickSortIncreasing(arrayRandom)));
-        System.out.println(Arrays.toString(insertionSortDecreasing(arrayRandom)));
-        System.out.println(Arrays.toString(selectionSortDecreasing(arrayRandom)));
+    public static int[] bubbleSortIncreasing(int[] ar) {
+        int[] newAr = Arrays.copyOf(ar,ar.length);
+        int tr;
+        boolean innerCycle=true;
+        int i=0;
+        while (innerCycle) {
+            innerCycle=false;
+            for (int j = 1; j < newAr.length-i; j++) {
+                if (newAr[j-1] > newAr[j]) {
+                    innerCycle = true;
+                    tr = newAr[j];
+                    newAr[j] = newAr[j-1];
+                    newAr[j-1] = tr;
+                }
+            }
+            i++;
+        }
+
+//        r (int i = 0; i < newAr.length-1; i++) {
+//            innerCycle = false;
+//            for (int j = 1; j < newAr.length-i; j++) {
+//                if (newAr[j-1] > newAr[j]) {
+//                    innerCycle = true;
+//                    tr = newAr[j];
+//                    newAr[j] = newAr[j-1];
+//                    newAr[j-1] = tr;
+//
+//                    fo  }
+//            }
+//            if (!innerCycle) {
+//                break;
+//            }
+//        }
+        return newAr;
+    }
+
+    public static int[] bubbleSortDecreasing(int[] ar) {
+        int[] newAr = Arrays.copyOf(ar,ar.length);
+        int tr;
+        for (int i = 0; i < newAr.length-1; i++) {
+            for (int j = newAr.length-1; j > i; j--) {
+                if (newAr[j-1] < newAr[j]) {
+                    tr = newAr[j];
+                    newAr[j] = newAr[j-1];
+                    newAr[j-1] = tr;
+                }
+            }
+        }
+        return newAr;
+    }
+
+    public static int[] shakerSortIncreasing(int[] ar) {
+        int[] newAr = Arrays.copyOf(ar,ar.length);
+        if (newAr.length<=1) {
+            return newAr;
+        }
+        int left = 0;
+        int right = newAr.length;
+        boolean b = true;
+        int begin = left - 1;
+        int end = right - 1;
+        while (b) {
+            b = false;
+            begin++;
+            for (int i = begin; i < end; i++) {
+                if (newAr[i] > newAr[i+1]) {
+                    int tr = newAr[i];
+                    newAr[i] = newAr[i+1];
+                    newAr[i+1] = tr;
+                    b = true;
+                }
+            }
+            if (!b) {
+                break;
+            }
+            end--;
+            for (int i = end; i > begin; i--) {
+                if (newAr[i] < newAr[i-1]) {
+                    int tr = newAr[i];
+                    newAr[i] = newAr[i-1];
+                    newAr[i-1] = tr;
+                    b = true;
+                }
+            }
+        }
+        return newAr;
+    }
+
+    public static int[] shakerSortDecreasing(int[] ar) {
+        int[] newAr = Arrays.copyOf(ar,ar.length);
+        if (newAr.length<=1) {
+            return newAr;
+        }
+        int left = 0;
+        int right = newAr.length;
+        boolean b = true;
+        int begin = left - 1;
+        int end = right - 1;
+        while (b) {
+            b = false;
+            begin++;
+            for (int i = begin; i < end; i++) {
+                if (newAr[i] < newAr[i+1]) {
+                    int tr = newAr[i];
+                    newAr[i] = newAr[i+1];
+                    newAr[i+1] = tr;
+                    b = true;
+                }
+            }
+            if (!b) {
+                break;
+            }
+            end--;
+            for (int i = end; i > begin; i--) {
+                if (newAr[i] > newAr[i-1]) {
+                    int tr = newAr[i];
+                    newAr[i] = newAr[i-1];
+                    newAr[i-1] = tr;
+                    b = true;
+                }
+            }
+        }
+        return newAr;
     }
 
     public static int[] insertionSortIncreasing(int[] ar) {
+        int[] newAr = Arrays.copyOf(ar,ar.length);
         int key, i; // key - число, которое нужно отсортировать на данной итерации; i - итератор, с помощью которого определяется, больше ли число из отсортированного массива числа key
-        for (int j = 1; j < ar.length; j++) {
-            key = ar[j];
+        for (int j = 1; j < newAr.length; j++) {
+            key = newAr[j];
             i = j - 1;
-            while (i >= 0 && ar[i] > key) {
-                ar[i + 1] = ar[i];
+            while (i >= 0 && newAr[i] > key) {
+                newAr[i + 1] = newAr[i];
                 i--;
             }
-            ar[i + 1] = key;
+            newAr[i + 1] = key;
         }
-        return ar;
+        return newAr;
     }
 
     public static int[] insertionSortDecreasing(int[] ar) {
+        int[] newAr = Arrays.copyOf(ar,ar.length);
         int key, i;
-        for (int j = 1; j < ar.length; j++) {
-            key = ar[j];
+        for (int j = 1; j < newAr.length; j++) {
+            key = newAr[j];
             i = j - 1;
-            while (i >= 0 && ar[i] < key) {
-                ar[i + 1] = ar[i];
+            while (i >= 0 && newAr[i] < key) {
+                newAr[i + 1] = newAr[i];
                 i--;
             }
-            ar[i + 1] = key;
+            newAr[i + 1] = key;
         }
-        return ar;
+        return newAr;
     }
 
     public static int[] selectionSortIncreasing(int[] ar) {
+        int[] newAr = Arrays.copyOf(ar,ar.length);
         int min, index;
-        for (int i = 0; i < ar.length-1; i++) {
-            min = ar[i];
+        for (int i = 0; i < newAr.length-1; i++) {
+            min = newAr[i];
             index = i;
-            for (int j = i + 1; j < ar.length; j++) {
-                if (ar[j] < min) {
-                    min = ar[j];
+            for (int j = i + 1; j < newAr.length; j++) {
+                if (newAr[j] < min) {
+                    min = newAr[j];
                     index = j;
                 }
             }
-            ar[index] = ar[i];
-            ar[i] = min;
+            newAr[index] = newAr[i];
+            newAr[i] = min;
         }
-        return ar;
+        return newAr;
     }
 
     public static int[] selectionSortDecreasing(int[] ar) {
+        int[] newAr = Arrays.copyOf(ar,ar.length);
         int max, index;
-        for (int i = 0; i < ar.length-1; i++) {
-            max = ar[i];
+        for (int i = 0; i < newAr.length-1; i++) {
+            max = newAr[i];
             index = i;
-            for (int j = i + 1; j < ar.length; j++) {
-                if (ar[j] > max) {
-                    max = ar[j];
+            for (int j = i + 1; j < newAr.length; j++) {
+                if (newAr[j] > max) {
+                    max = newAr[j];
                     index = j;
                 }
             }
-            ar[index] = ar[i];
-            ar[i] = max;
+            newAr[index] = newAr[i];
+            newAr[i] = max;
         }
-        return ar;
+        return newAr;
     }
 
     public static int[] mergeSortIncreasing(int[] ar) {
-        return mergeSort(ar,0, ar.length-1);
+        int[] newAr = Arrays.copyOf(ar,ar.length);
+        return mergeSort(newAr,0, ar.length-1);
     }
     public static int[] mergeSort(int[] ar, int p, int r) {
         if (p<r) {
@@ -135,7 +257,8 @@ public class Sort {
     }
 
     public static int[] quickSortIncreasing(int[] ar) {
-        return quickSort(ar,0, ar.length-1);
+        int[] newAr = Arrays.copyOf(ar,ar.length);
+        return quickSort(newAr,0, ar.length-1);
     }
     public static int[] quickSort(int[] array, int firstIndex, int lastIndex) {
         if (firstIndex<lastIndex) {
@@ -149,15 +272,15 @@ public class Sort {
         int leftIndex = first;
         int rightIndex = last;
 
-        int general = array[first+(last-first)/2];
+        // int divider = array[first+(last-first)/2];
+        int divider = array[first];
 
         while (leftIndex <= rightIndex) {
 
-            while (array[leftIndex] < general && leftIndex<=last) {
+            while (array[leftIndex] < divider && leftIndex<=last) {
                 leftIndex++;
             }
-
-            while (array[rightIndex] > general && rightIndex>=first) {
+            while (array[rightIndex] > divider && rightIndex>=first) {
                 rightIndex--;
             }
 
@@ -173,4 +296,7 @@ public class Sort {
         }
         return leftIndex;
     }
+
+
+
 }
