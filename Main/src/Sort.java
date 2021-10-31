@@ -38,36 +38,25 @@ public class Sort {
             }
             i++;
         }
-
-//        r (int i = 0; i < newAr.length-1; i++) {
-//            innerCycle = false;
-//            for (int j = 1; j < newAr.length-i; j++) {
-//                if (newAr[j-1] > newAr[j]) {
-//                    innerCycle = true;
-//                    tr = newAr[j];
-//                    newAr[j] = newAr[j-1];
-//                    newAr[j-1] = tr;
-//
-//                    fo  }
-//            }
-//            if (!innerCycle) {
-//                break;
-//            }
-//        }
         return newAr;
     }
 
     public static int[] bubbleSortDecreasing(int[] ar) {
         int[] newAr = Arrays.copyOf(ar,ar.length);
         int tr;
-        for (int i = 0; i < newAr.length-1; i++) {
+        boolean innerCycle=true;
+        int i=0;
+        while (innerCycle) {
+            innerCycle=false;
             for (int j = newAr.length-1; j > i; j--) {
-                if (newAr[j-1] < newAr[j]) {
+                if (newAr[j - 1] < newAr[j]) {
+                    innerCycle = true;
                     tr = newAr[j];
-                    newAr[j] = newAr[j-1];
-                    newAr[j-1] = tr;
+                    newAr[j] = newAr[j - 1];
+                    newAr[j - 1] = tr;
                 }
             }
+            i++;
         }
         return newAr;
     }
