@@ -11,19 +11,20 @@ public class InsertionSort {
         System.out.println(Arrays.toString(insertionSortIncreasingVer1(array)));
         System.out.println(Arrays.toString(insertionSortDecreasingVer1(array)));
         System.out.println(Arrays.toString(insertionSortIncreasingVer2(array)));
+        System.out.println(Arrays.toString(insertionSortIncreasingVer3(array)));
     }
 
     public static int[] insertionSortIncreasingVer1(int[] ar) {
         int[] newAr = Arrays.copyOf(ar,ar.length);
-        int key, i; // key - число, которое нужно отсортировать на данной итерации; i - итератор, с помощью которого определяется, больше ли число из отсортированного массива числа key
+        int key, endIndex; // key - число, которое нужно отсортировать на данной итерации; endIndex - итератор, с помощью которого определяется, больше ли число из отсортированного массива числа key
         for (int j = 1; j < newAr.length; j++) {
             key = newAr[j];
-            i = j - 1;
-            while (i >= 0 && newAr[i] > key) {
-                newAr[i + 1] = newAr[i];
-                i--;
+            endIndex = j - 1;
+            while (endIndex >= 0 && newAr[endIndex] > key) {
+                newAr[endIndex + 1] = newAr[endIndex];
+                endIndex--;
             }
-            newAr[i + 1] = key;
+            newAr[endIndex + 1] = key;
         }
         return newAr;
     }
@@ -46,7 +47,6 @@ public class InsertionSort {
         int[] newAr = Arrays.copyOf(ar,ar.length);
         return insertionSortVer2(newAr, newAr.length-1);
     }
-
     public static int[] insertionSortVer2(int[] ar, int index) {
         if (index<=1) {
             return ar;
@@ -63,4 +63,20 @@ public class InsertionSort {
         return ar;
     }
 
+
+    public static int[] insertionSortIncreasingVer3(int[] ar) {
+        int[] newAr = Arrays.copyOf(ar,ar.length);
+        int key, endIndex, beginIndex; // key - число, которое нужно отсортировать на данной итерации; endIndex - итератор, с помощью которого определяется, больше ли число из отсортированного массива числа key
+        for (int j = 1; j < newAr.length; j++) {
+            key = newAr[j];
+            endIndex = j - 1;
+            beginIndex = 0;
+            while (endIndex - beginIndex >) {
+                newAr[endIndex + 1] = newAr[endIndex];
+                endIndex--;
+            }
+            newAr[endIndex + 1] = key;
+        }
+        return newAr;
+    }
 }
