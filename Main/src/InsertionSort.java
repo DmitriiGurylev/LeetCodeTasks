@@ -48,13 +48,12 @@ public class InsertionSort {
         return insertionSortVer2(newAr, newAr.length-1);
     }
     public static int[] insertionSortVer2(int[] ar, int index) {
-        if (index<=1) {
+        if (index<=0) {
             return ar;
         }
         insertionSortVer2(ar, index-1);
-        int key,i;
-        key = ar[index];
-        i = index-1;
+        int key = ar[index];
+        int i = index-1;
         while (i >= 0 && ar[i] > key) {
             ar[i + 1] = ar[i];
             i--;
@@ -63,19 +62,30 @@ public class InsertionSort {
         return ar;
     }
 
-
     public static int[] insertionSortIncreasingVer3(int[] ar) {
         int[] newAr = Arrays.copyOf(ar,ar.length);
         int key, endIndex, beginIndex; // key - число, которое нужно отсортировать на данной итерации; endIndex - итератор, с помощью которого определяется, больше ли число из отсортированного массива числа key
         for (int j = 1; j < newAr.length; j++) {
             key = newAr[j];
-            endIndex = j - 1;
-            beginIndex = 0;
-            while (endIndex - beginIndex >) {
-                newAr[endIndex + 1] = newAr[endIndex];
+            endIndex = j;
+            beginIndex = -1;
+            while (endIndex - beginIndex > 1) {
+                int middleIndex = beginIndex + (endIndex +1 - beginIndex) / 2;
+                int middleValue = newAr[middleIndex];
+                if (middleValue > key) {
+                    endIndex = middleIndex;
+                } else if (middleValue <= key) {
+                    beginIndex = middleIndex;
+                }
+            }
+            endIndex=j-1;
+
+            while (endIndex > beginIndex) {
+                newAr[endIndex+1] = newAr[endIndex];
                 endIndex--;
             }
-            newAr[endIndex + 1] = key;
+
+            newAr[beginIndex+1] = key;
         }
         return newAr;
     }
