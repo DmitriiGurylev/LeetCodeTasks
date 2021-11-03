@@ -1,13 +1,15 @@
 package src;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.stream.Collectors;
 
-public class BinarySearch {
+public class Search {
     public static void main(String[] args) {
         int[] array = new int[]{
                 20, 4, 5, 2, 5, 8, 5, 76, 43, 75, 75, 21, 75, 75, 31, 3,
                 5, 99, 7, 542, 544, 51451, 31, 52, 35, 61, 17, 74, 4, 6, 3, 7, 2, 1, 8, 9, 10};
         int[] sortedArray = mergeSortIncreasingVer2(array);
+        Set<Integer> set = Arrays.stream(array).boxed().collect(Collectors.toSet());
 
         System.out.println(binarySearchRecursiveVer1(sortedArray, 31)); // true
         System.out.println(binarySearchRecursiveVer1(sortedArray, 32)); // false
@@ -19,7 +21,8 @@ public class BinarySearch {
         System.out.println(binarySearchIterativeVer1(sortedArray, 10)); // true
         System.out.println(binarySearchIterativeVer1(sortedArray, 777)); // false
 
-
+        System.out.println(searchASumOfTwoIntegerOfTheSet(set, 15));
+        System.out.println(searchASumOfTwoIntegerOfTheSet(set, 98));
     }
 
     public static int[] mergeSortIncreasingVer2(int[] ar) {
@@ -108,4 +111,23 @@ public class BinarySearch {
         }
         return ar[beginIndex] == value;
     }
+
+    public static boolean searchASumOfTwoIntegerOfTheSet(Set set, int value) {
+        int[] array = new int[set.size()];
+        for (int i=0; i<set.size(); i++) {
+            array[i] = (int) set.toArray()[i];
+        }
+        int valueI, valueJ;
+        for (int i=0; i<set.size()-1; i++) {
+            valueI = array[i];
+            for (int j=i+1; j<set.size(); j++) {
+                valueJ = array[j];
+                if (valueI+valueJ == value && valueI!=valueJ) {
+                    return  true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
