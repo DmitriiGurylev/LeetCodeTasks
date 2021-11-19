@@ -74,7 +74,7 @@ public class InsertionSort {
                 int middleValue = newAr[middleIndex];
                 if (middleValue > key) {
                     endIndex = middleIndex;
-                } else if (middleValue <= key) {
+                } else {
                     beginIndex = middleIndex;
                 }
             }

@@ -2,6 +2,8 @@ package src;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Search {
     public static void main(String[] args) {
@@ -21,8 +23,10 @@ public class Search {
         System.out.println(binarySearchIterativeVer1(sortedArray, 10)); // true
         System.out.println(binarySearchIterativeVer1(sortedArray, 777)); // false
 
-        System.out.println(searchASumOfTwoIntegerOfTheSet(set, 15));
-        System.out.println(searchASumOfTwoIntegerOfTheSet(set, 98));
+        System.out.println(searchASumOfTwoIntegerOfTheSetVer1(set, 15));
+        System.out.println(searchASumOfTwoIntegerOfTheSetVer1(set, 98));
+
+        System.out.println(searchASumOfTwoIntegerOfTheSetVer2(set, 10)); // true
     }
 
     public static int[] mergeSortIncreasingVer2(int[] ar) {
@@ -95,7 +99,6 @@ public class Search {
     }
 
     public static boolean binarySearchIterativeVer1(int[] ar, int value) {
-        int[] newAr = Arrays.copyOf(ar, ar.length);
         int beginIndex = 0;
         int endIndex = ar.length - 1;
         while (endIndex > beginIndex) {
@@ -112,7 +115,7 @@ public class Search {
         return ar[beginIndex] == value;
     }
 
-    public static boolean searchASumOfTwoIntegerOfTheSet(Set set, int value) {
+    public static boolean searchASumOfTwoIntegerOfTheSetVer1(Set set, int value) {
         int[] array = new int[set.size()];
         for (int i=0; i<set.size(); i++) {
             array[i] = (int) set.toArray()[i];
@@ -127,6 +130,41 @@ public class Search {
                 }
             }
         }
+        return false;
+    }
+
+
+    // TODO 2.3-7 isn't ready!!!!!! use only if integer of set are >= 0
+    public static boolean searchASumOfTwoIntegerOfTheSetVer2(Set<Integer> set, int value) {
+        List<Integer> listOfIntFirst = new ArrayList<>();
+        List<Integer> listOfIntSecond = new ArrayList<>();
+        for (int i=0; i<set.size(); i++) {
+            listOfIntFirst.add((Integer) set.toArray()[i]);
+        }
+
+        listOfIntFirst = listOfIntFirst.stream().sorted().collect(Collectors.toList());
+        listOfIntSecond = listOfIntFirst.stream().map(v -> value-v).sorted().collect(Collectors.toList());
+
+        List<Integer> newList = IntStream.range(0, listOfIntFirst.size() + listOfIntSecond.size())
+                .mapToObj(v -> 0)
+                .collect(Collectors.toList());
+
+        int i=0, j=0;
+        int z=0;
+        while (z< newList.size()) {
+
+            if (j>=listOfIntSecond.size() || (i<listOfIntFirst.size() && listOfIntFirst.get(i)<=listOfIntSecond.get(j))) {
+                newList.set(z,listOfIntFirst.get(i));
+                i++;
+            } else {
+                newList.set(z,listOfIntSecond.get(j));
+                j++;
+            }
+
+
+            z++;
+        }
+
         return false;
     }
 
