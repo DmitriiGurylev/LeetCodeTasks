@@ -16,18 +16,11 @@ public class Task16_removeFirstDuplicates {
 
         long[] firstArray = new long[]{0,4,5,2,6,9,2,5,7,1,5,9,5,3,0,6,4,1,43,64,1,6,7,3,4,5,9,2};
         System.out.println(Arrays.toString(firstArray));
-        System.out.println(Arrays.toString(deleteDuplicates(firstArray)));
-
+        System.out.println(Arrays.toString(deleteDuplicatesVer1(firstArray)));
     }
 
-    public static long[] deleteDuplicates(long[] a) {
-        long[] b = IntStream.range(0, a.length)
-                .mapToLong(el -> a[a.length-el-1])
-                .distinct()
-                .toArray();
-        return IntStream.range(0, b.length)
-                .mapToLong(el -> b[b.length-el-1])
-                .toArray();
+    public static long[] deleteDuplicatesVer1(long[] a) {
+        long[] b = IntStream.range(0, a.length).mapToLong(integer -> a[a.length-integer-1]).distinct().toArray();
+        return IntStream.range(0, b.length).mapToLong(integer -> b[b.length-integer-1]).toArray();
     }
-
 }
