@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-/*
+/**
  * Suppose you have n integers labeled 1 through n.
  * A permutation of those n integers perm (1-indexed)
  * is considered a beautiful arrangement if for every i (1 <= i <= n),

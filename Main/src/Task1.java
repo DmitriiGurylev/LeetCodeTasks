@@ -1,6 +1,6 @@
 package src;
 
-/*
+/**
 * You are given an array of distinct integers arr and an array of integer arrays pieces,
 * where the integers in pieces are distinct.
 * Your goal is to form arr by concatenating the arrays in pieces in any order.
