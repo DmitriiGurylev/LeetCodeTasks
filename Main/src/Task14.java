@@ -30,7 +30,6 @@ public class Task14 {
             }
         }
         return 0;
-
     }
 
 }

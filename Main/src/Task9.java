@@ -1,6 +1,8 @@
 package src;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Task9 {
 
@@ -11,37 +13,16 @@ public class Task9 {
         System.out.println(thirdMax(arr3));
         System.out.println(findDisappearedNumbers(arr3));
         System.out.println(Arrays.toString(plusOne(arr3)));
+        System.out.println(removeElement(arr3,7));
     }
 
     public static int removeElement(int[] nums, int val) {
-        int deleteItems = 0;
-        int end = nums.length-1;
-        for (int i=0; i<nums.length; i++){
-            if (nums.length == 1 & nums[0] == val){
-                deleteItems++;
-                break;
-            }
-            if (nums[i]==val){
-                while(nums[end] == val && end>=0){
-                    if (end != i){
-                        end--;
-                        deleteItems++;
-                    }
-                    else{
-                        deleteItems++;
-                        return nums.length - deleteItems;
-                    }
-                }
-                nums[i] = nums[end];
-                nums[end] = val;
-                end--;
-                deleteItems++;
-            }
-            if (i >= end){
-                break;
-            }
-        }
-        return nums.length - deleteItems;
+        List<Integer> list = IntStream.range(0, nums.length)
+                .filter(i -> nums[i] != val)
+                .mapToObj(i -> nums[i])
+                .collect(Collectors.toList());
+        IntStream.range(0, list.size()).forEach(i -> nums[i] = list.get(i));
+        return list.size();
     }
 
     public static int heightChecker(int[] heights) {
