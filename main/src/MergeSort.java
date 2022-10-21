@@ -17,10 +17,10 @@ public class MergeSort {
     }
     public static int[] mergeSortVer1(int[] ar, int leftBorder, int rightBorder) {
         if (leftBorder<rightBorder) { // условие: левый индекс на данной итерации должен быть меньше, чем правый
-            int q = leftBorder+(rightBorder-leftBorder)/2; // определение среднего индекса, по которому будет разбиваться на части массив (сам индекс относится к левому массиву)
-            mergeSortVer1(ar,leftBorder,q); // рекурсивный вызов для левой части массива
-            mergeSortVer1(ar,q+1,rightBorder); // рекурсивный вызов для правой части массива
-            return mergeVer1(ar,leftBorder,q,rightBorder); // после того, как оба массива максимально разделились, идет их объединение
+            int mid = (rightBorder - leftBorder) / 2 + leftBorder; // определение среднего индекса, по которому будет разбиваться на части массив (сам индекс относится к левому массиву)
+            mergeSortVer1(ar,leftBorder,mid); // рекурсивный вызов для левой части массива
+            mergeSortVer1(ar,mid+1,rightBorder); // рекурсивный вызов для правой части массива
+            return mergeVer1(ar,leftBorder,mid,rightBorder); // после того, как оба массива максимально разделились, идет их объединение
         }
         return ar;
     }
@@ -43,13 +43,12 @@ public class MergeSort {
 
         int i=0, j=0;
 
-        // сортировка массива на основе левой и правой части
+        // сортировка массива на основе уже отсортированных левой и правой части
         for (int k=leftIndex; k<rightIndex+1; k++) {
             if (leftArray[i] < rightArray[j]) {
                 ar[k] = leftArray[i];
                 i++;
-            }
-            else {
+            } else {
                 ar[k] = rightArray[j];
                 j++;
             }
@@ -63,10 +62,10 @@ public class MergeSort {
     }
     public static int[] mergeSortVer2(int[] ar, int leftBorder, int rightBorder) {
         if (leftBorder<rightBorder) { // условие: левый индекс на данной итерации должен быть меньше, чем правый
-            int q = leftBorder+(rightBorder-leftBorder)/2; // определение среднего индекса, по которому будет разбиваться на части массив (сам индекс относится к левому массиву)
-            mergeSortVer2(ar,leftBorder,q); // рекурсивный вызов для левой части массива
-            mergeSortVer2(ar,q+1,rightBorder); // рекурсивный вызов для правой части массива
-            return mergeNewVer2(ar,leftBorder,q,rightBorder); // после того, как оба массива максимально разделились, идет их объединение
+            int mid = (rightBorder - leftBorder) / 2 + leftBorder; // определение среднего индекса, по которому будет разбиваться на части массив (сам индекс относится к левому массиву)
+            mergeSortVer2(ar,leftBorder,mid); // рекурсивный вызов для левой части массива
+            mergeSortVer2(ar,mid+1,rightBorder); // рекурсивный вызов для правой части массива
+            return mergeNewVer2(ar,leftBorder,mid,rightBorder); // после того, как оба массива максимально разделились, идет их объединение
         }
         return ar;
     }
@@ -86,7 +85,7 @@ public class MergeSort {
 
         int iForLeftAr=0, jForRightAr=0;
 
-        // сортировка массива на основе левой и правой части
+        // сортировка массива на основе уже отсортированных левой и правой части
         for (int k=leftIndex; k<rightIndex+1; k++) {
             if (iForLeftAr>=n1) {
                 ar[k] = rightArray[jForRightAr];
