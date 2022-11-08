@@ -2,7 +2,7 @@ package src;
 
 import java.util.Scanner;
 
-public class Yandex_Cup_2022_2 {
+public class Yandex_Cup_2022_3 {
 
     public static void main(String[] args) {
         Scanner console = new Scanner(System.in);
