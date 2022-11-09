@@ -16,18 +16,19 @@ public class InsertionSort {
 
     public static int[] insertionSortIncreasingVer1(int[] ar) {
         int[] newAr = Arrays.copyOf(ar,ar.length);
-        int key, endIndex; // key - число, которое нужно отсортировать на данной итерации; endIndex - итератор, с помощью которого определяется, больше ли число из отсортированного массива числа key
+        int valueToSort, endIndexOfSortedArr; // valueToSort - число, которое нужно отсортировать на данной итерации; endIndex - итератор, с помощью которого определяется, больше ли число из отсортированного массива числа key
         for (int j = 1; j < newAr.length; j++) {
-            key = newAr[j];
-            endIndex = j - 1;
-            while (endIndex >= 0 && newAr[endIndex] > key) {
-                newAr[endIndex + 1] = newAr[endIndex];
-                endIndex--;
+            valueToSort = newAr[j];
+            endIndexOfSortedArr = j - 1;
+            while (endIndexOfSortedArr >= 0 && newAr[endIndexOfSortedArr] > valueToSort) {
+                newAr[endIndexOfSortedArr + 1] = newAr[endIndexOfSortedArr];
+                endIndexOfSortedArr--;
             }
-            newAr[endIndex + 1] = key;
+            newAr[endIndexOfSortedArr + 1] = valueToSort;
         }
         return newAr;
     }
+
     public static int[] insertionSortDecreasingVer1(int[] ar) {
         int[] newAr = Arrays.copyOf(ar,ar.length);
         int key, i;
