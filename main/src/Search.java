@@ -1,9 +1,11 @@
 package src;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Search {
     public static void main(String[] args) {
@@ -94,8 +96,6 @@ public class Search {
         } else {
             return binarySearchRec(ar, middleIndex, endIndex, value);
         }
-
-
     }
 
     public static boolean binarySearchIterativeVer1(int[] ar, int value) {
@@ -160,11 +160,8 @@ public class Search {
                 newList.set(z,listOfIntSecond.get(j));
                 j++;
             }
-
-
             z++;
         }
-
         return false;
     }
 

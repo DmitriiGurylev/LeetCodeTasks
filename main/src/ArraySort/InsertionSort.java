@@ -85,7 +85,6 @@ public class InsertionSort {
                 newAr[endIndex+1] = newAr[endIndex];
                 endIndex--;
             }
-
             newAr[beginIndex+1] = key;
         }
         return newAr;
