@@ -5,6 +5,8 @@ import java.util.Set;
 
 public class HasCycle {
 
+    public static void main (String[] args) {}
+
     public boolean hasCycle(ListNode head) {
         Set<ListNode> set = new HashSet<>();
         while (head != null) {
