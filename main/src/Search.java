@@ -15,15 +15,7 @@ public class Search {
         int[] sortedArray = mergeSortIncreasingVer2(array);
         Set<Integer> set = Arrays.stream(array).boxed().collect(Collectors.toSet());
 
-        System.out.println(binarySearchRecursiveVer1(sortedArray, 31)); // true
-        System.out.println(binarySearchRecursiveVer1(sortedArray, 32)); // false
-        System.out.println(binarySearchRecursiveVer1(sortedArray, 10)); // true
-        System.out.println(binarySearchRecursiveVer1(sortedArray, 777)); // false
 
-        System.out.println(binarySearchIterativeVer1(sortedArray, 31)); // true
-        System.out.println(binarySearchIterativeVer1(sortedArray, 32)); // false
-        System.out.println(binarySearchIterativeVer1(sortedArray, 10)); // true
-        System.out.println(binarySearchIterativeVer1(sortedArray, 777)); // false
 
         System.out.println(searchASumOfTwoIntegerOfTheSetVer1(set, 15));
         System.out.println(searchASumOfTwoIntegerOfTheSetVer1(set, 98));
@@ -81,38 +73,34 @@ public class Search {
         return ar;
     }
 
-    public static boolean binarySearchRecursiveVer1(int[] ar, int value) {
-        return binarySearchRec(ar, 0, ar.length - 1, value);
+    public int search(int[] nums, int target) {
+        return searchRec(nums, 0, nums.length-1, target);
     }
 
-    public static boolean binarySearchRec(int[] ar, int beginIndex, int endIndex, int value) {
-        if (beginIndex == endIndex) {
-            return ar[beginIndex] == value;
+    private static int searchRec(int[] nums, int left, int right, int target) {
+        if (left >= right ) {
+            return target == nums[left] ? left : -1;
         }
-        int middleIndex = beginIndex + (endIndex + 1 - beginIndex) / 2;
-        int middleValue = ar[middleIndex];
-        if (middleValue > value) {
-            return binarySearchRec(ar, beginIndex, middleIndex - 1, value);
-        } else {
-            return binarySearchRec(ar, middleIndex, endIndex, value);
-        }
+        int middle = left + (right-left)/2;
+        return target <= nums[middle] ?
+                searchRec(nums, left, middle, target) :
+                searchRec(nums, middle + 1, right, target);
     }
 
-    public static boolean binarySearchIterativeVer1(int[] ar, int value) {
-        int beginIndex = 0;
-        int endIndex = ar.length - 1;
-        while (endIndex > beginIndex) {
-            int middleIndex = beginIndex + (endIndex - beginIndex) / 2;
-            int middleValue = ar[middleIndex];
-            if (middleValue > value) {
-                endIndex = middleIndex - 1;
-            } else if (middleValue < value) {
-                beginIndex = middleIndex + 1;
+    public int searchWithWhile(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length-1;
+        while (left<=right) {
+            int middle = left + (right-left)/2;
+            if (target == nums[middle]) {
+                return middle;
+            } else if (target < nums[middle]) {
+                right = middle-1;
             } else {
-                return true;
+                left = middle+1;
             }
         }
-        return ar[beginIndex] == value;
+        return -1;
     }
 
     public static boolean searchASumOfTwoIntegerOfTheSetVer1(Set set, int value) {
