@@ -14,10 +14,9 @@ import java.util.List;
 *
 * */
 public class FizzBuzz {
-    public static void main(String[] args) {}
 
-    public List<String> fizzBuzz(int n) {
-        List<String> finalList = new ArrayList<>();
+    public static List<String> fizzBuzz(int n) {
+        List<String> resList = new ArrayList<>();
 
         for (int i=1; i<=n; i++) {
             StringBuilder sb = new StringBuilder();
@@ -30,8 +29,8 @@ public class FizzBuzz {
             if (sb.toString().equals("")) {
                 sb.append(i);
             }
-            finalList.add(sb.toString());
+            resList.add(sb.toString());
         }
-        return finalList;
+        return resList;
     }
 }

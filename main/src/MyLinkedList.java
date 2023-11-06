@@ -1,37 +1,28 @@
 package src;
 
+import java.util.ArrayList;
+
 /**
  * Your MyLinkedList object will be instantiated and called as such:
  * MyLinkedList obj = new MyLinkedList();
  * int param_1 = obj.get(index);
- * obj.addAtHead(val);
- * obj.addAtTail(val);
+ * obj.addAtHead(index, val);
+ * obj.addAtTail(index, val);
+ * obj.add(val);
  * obj.addAtIndex(index,val);
  * obj.deleteAtIndex(index);
  */
-class MyLinkedList {
-
-    public static void main(String[] args) {
-        MyLinkedList obj = new MyLinkedList();
-        obj.addAtHead(1);
-        obj.addAtTail(3);
-        obj.addAtIndex(1,2);
-        int param_1 = obj.get(1);
-        obj.deleteAtIndex(1);
-        int param_2 = obj.get(1);
-    }
-
-
+public class MyLinkedList {
 
     int size;
-    DoubleListNode firstNode;
-    DoubleListNode lastNode;
+    Node firstNode;
+    Node lastNode;
 
-    public class DoubleListNode {
+    public class Node {
         Integer val;
-        DoubleListNode prev;
-        DoubleListNode next;
-        DoubleListNode(DoubleListNode prev, int val, DoubleListNode next) {
+        Node prev;
+        Node next;
+        Node(int val, Node prev, Node next) {
             this.val = val;
             this.prev = prev;
             this.next = next;
@@ -47,7 +38,7 @@ class MyLinkedList {
     public int get(int index) {
         if (index >= 0 && index < size) {
             int counter = 0;
-            DoubleListNode nowNode = firstNode;
+            Node nowNode = firstNode;
 
             for (int i = 0; i < size; i++) {
                 if (index == counter) {
@@ -62,11 +53,11 @@ class MyLinkedList {
 
     public void addAtHead(int val) {
         if (size == 0) {
-            firstNode = new DoubleListNode(null, val, null);
+            firstNode = new Node(val, null, null);
             lastNode = firstNode;
         } else {
-            DoubleListNode first = firstNode;
-            firstNode = new DoubleListNode(null, val, first);
+            Node first = firstNode;
+            firstNode = new Node(val, null, first);
             first.prev = firstNode;
         }
         size++;
@@ -74,11 +65,10 @@ class MyLinkedList {
 
     public void addAtTail(int val) {
         if (size==0) {
-            lastNode = new DoubleListNode(null, val, null);
-            firstNode = lastNode;
+            addAtHead(val);
         } else {
-            DoubleListNode last = lastNode;
-            lastNode = new DoubleListNode(last, val, null);
+            Node last = lastNode;
+            lastNode = new Node(val, last, null);
             last.next = lastNode;
         }
         size++;
@@ -86,29 +76,34 @@ class MyLinkedList {
 
     public void addAtIndex(int index, int val) {
         if (index<0 || index>size) {
+            throw new RuntimeException("bad index");
         } else if (index==size) {
             addAtTail(val);
         } else if (index==0) {
             addAtHead(val);
         } else {
-            int counter = 0;
-            DoubleListNode nowNode = firstNode;
-
-            for (int i = 0; i < size; i++) {
-                if (index == counter) {
-                    break;
+            Node newNode;
+            if (size / 2 + 1 > index) {
+                Node nowNode = firstNode;
+                for (int i=0; i<index; i++) {
+                    nowNode = nowNode.next;
                 }
-                nowNode = nowNode.next;
-                counter++;
+                newNode = new Node(val, nowNode.prev, nowNode);
+            } else {
+                Node nowNode = lastNode;
+                for (int i=size-1; i>index; i--) {
+                    nowNode = nowNode.prev;
+                }
+                newNode = new Node(val, nowNode, nowNode.next);
             }
-            DoubleListNode newNode = new DoubleListNode(nowNode.prev, val, nowNode);
-
-            if (nowNode.prev!=null) {
-                nowNode.prev.next = newNode;
-            }
-            nowNode.prev = newNode;
+            newNode.next.prev = newNode;
+            newNode.prev.next = newNode;
             size++;
         }
+    }
+
+    public void add(int val) {
+        addAtTail(val);
     }
 
     public void deleteAtIndex(int index) {
@@ -116,7 +111,7 @@ class MyLinkedList {
             return;
         }
         int counter = 0;
-        DoubleListNode nowNode = firstNode;
+        Node nowNode = firstNode;
 
         for (int i = 0; i < size; i++) {
             if (index == counter) {

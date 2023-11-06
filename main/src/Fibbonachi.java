@@ -2,29 +2,7 @@ package src;
 
 public class Fibbonachi {
 
-    public static void main(String[] args) {
-        System.out.println(fibbIter(-1));
-        System.out.println(fibbIter(0));
-        System.out.println(fibbIter(1));
-        System.out.println(fibbIter(2));
-        System.out.println(fibbIter(4));
-        System.out.println(fibbIter(8));
-        System.out.println(fibbIter(16));
-        System.out.println(fibbIter(32));
-        System.out.println(fibbIter(64));
-
-        System.out.println(fibbRec(-1));
-        System.out.println(fibbRec(0));
-        System.out.println(fibbRec(1));
-        System.out.println(fibbRec(2));
-        System.out.println(fibbRec(4));
-        System.out.println(fibbRec(8));
-        System.out.println(fibbRec(16));
-        System.out.println(fibbRec(32));
-        System.out.println(fibbRec(64));
-    }
-
-    private static int fibbIter(int val) {
+    public static int fibbIter(int val) {
         if (val<0) {
             return -1;
         }
@@ -41,14 +19,14 @@ public class Fibbonachi {
         return second;
     }
 
-    private static int fibbRec(int val) {
+    public static int fibbRec(int val) {
         if (val < 0) {
             return -1;
         }
-       return fibb(val, 0, 1);
+        return fibb(val, 0, 1);
     }
 
-    private static int fibb(int val, int first, int second) {
+    public static int fibb(int val, int first, int second) {
         if (val == 0) {
             return first;
         } else if (val == 1) {
@@ -56,5 +34,4 @@ public class Fibbonachi {
         }
         return fibb(val-1, second, second+first);
     }
-
 }

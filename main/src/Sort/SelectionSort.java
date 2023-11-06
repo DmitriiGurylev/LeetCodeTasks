@@ -1,52 +1,33 @@
-package src;
+package src.Sort;
 
-import java.util.Arrays;
+import static src.Helpers.swapValuesOfArray;
 
-public class Sort {
-    public static void main(String[] args) {
-        int[] array = new int[]{
-                20, 4, 5, 2, 5, 8, 5, 76, 43, 75, 75, 21, 75, 75, 31, 3,
-                5, 99, 7, 542, 544, 51451, 31, 52, 35, 61, 17, 74, 4};
-
-        System.out.println(Arrays.toString(selectionSortIncreasing(array)));
-
-        System.out.println(Arrays.toString(selectionSortDecreasing(array)));
-    }
-
-    public static int[] selectionSortIncreasing(int[] ar) {
-        int[] newAr = Arrays.copyOf(ar,ar.length);
-        int min, index;
-        for (int i = 0; i < newAr.length-1; i++) {
-            min = newAr[i];
-            index = i;
-            for (int j = i + 1; j < newAr.length; j++) {
-                if (newAr[j] < min) {
-                    min = newAr[j];
-                    index = j;
+public class SelectionSort {
+    public static void selectionSortIncreasing(int[] ar) {
+        for (int i=0; i<ar.length-1; i++) {
+            int curMinIndex = i;
+            int curMin = ar[i];
+            for (int j=i+1; j<ar.length; j++) {
+                if (ar[j] < curMin) {
+                    curMinIndex = j;
+                    curMin = ar[j];
                 }
             }
-            newAr[index] = newAr[i];
-            newAr[i] = min;
+            swapValuesOfArray(ar, curMinIndex, i);
         }
-        return newAr;
     }
 
-    public static int[] selectionSortDecreasing(int[] ar) {
-        int[] newAr = Arrays.copyOf(ar,ar.length);
-        int max, index;
-        for (int i = 0; i < newAr.length-1; i++) {
-            max = newAr[i];
-            index = i;
-            for (int j = i + 1; j < newAr.length; j++) {
-                if (newAr[j] > max) {
-                    max = newAr[j];
-                    index = j;
+    public static void selectionSortDecreasing(int[] ar) {
+        for (int i=0; i<ar.length; i++) {
+            int curMaxIndex = i;
+            int curMax = ar[i];
+            for (int j=i+1; j<ar.length; j++) {
+                if (ar[j] > curMax) {
+                    curMaxIndex = j;
+                    curMax = ar[j];
                 }
             }
-            newAr[index] = newAr[i];
-            newAr[i] = max;
+            swapValuesOfArray(ar, curMaxIndex, i);
         }
-        return newAr;
     }
-
 }
