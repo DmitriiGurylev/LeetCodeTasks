@@ -1,6 +1,5 @@
 package src;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -12,11 +11,16 @@ import java.util.LinkedList;
  */
 public class MyHashSet {
     int size;
-    LinkedList<Integer>[] buckets = null;
+    LinkedList<Integer>[] buckets;
 
     public MyHashSet() {
         this.size = 1000;
-        this.buckets = new LinkedList[size];
+        this.buckets = new LinkedList[this.size];
+    }
+
+    public MyHashSet(int size) {
+        this.size = size;
+        this.buckets = new LinkedList[this.size];
     }
 
     public void add(int key) {

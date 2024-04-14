@@ -12,10 +12,10 @@ public class MyHashSetTest {
         myhs.add(1);
         myhs.add(2);
         Assertions.assertTrue(myhs.contains(1));
-        Assertions.assertTrue(myhs.contains(3));
+        Assertions.assertFalse(myhs.contains(3));
         myhs.add(2);
         Assertions.assertTrue(myhs.contains(2));
         myhs.remove(2);
-        Assertions.assertTrue(myhs.contains(2));
+        Assertions.assertFalse(myhs.contains(2));
     }
 }
